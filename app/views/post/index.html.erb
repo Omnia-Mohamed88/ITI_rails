@@ -1,1 +1,22 @@
-<p>Helloooo</p>
+# <p>Helloooo</p>
+
+<% @posts.each do |post| %>
+    <div>
+    <h1> <%= post.title %>
+    </h1>
+    <h3>
+    <%= post.content %>
+    </h3>
+    <button>
+    Edit
+    </button>
+    <button>
+    delete
+    </button>
+    <%= button_to "Delete", post_path(post), method: :delete%>
+    <button>
+    Show
+    </button>
+    <a href="<%= post_path(post) %>">Show</a>
+    </div>
+    <% end %>

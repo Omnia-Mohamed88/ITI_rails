@@ -1,7 +1,46 @@
-class PostController < ApplicationController
-    def index 
-        # post = Post.create({title: "t1" , content: "content1"})
-        post = Post.all
-        puts "+++++++++++++++==#{post.inspect}"
+class PostsController < ApplicationController
+    def index
+     	@posts=Post.all
     end
-   end
+
+    def new 
+      	@post=Post.new
+    end
+
+    def create
+
+        @post = Post.new({title: params[:post][:title], content: params[:post][:content]})
+        if @post.save 
+        redirect_to @post
+        else
+        render :new 
+        end
+
+    end
+
+    def show
+      	@post=Post.find(params[:id])
+        puts "#{@post}"
+    end
+
+    def edit
+      	@post = Post.find(params[:id])
+    end
+
+      def update
+          @post = Post.find(params[:id])
+          if @post.update(post_params)
+              redirect_to @post
+          else
+              render :edit
+          end
+      end
+
+    def destroy
+        @post = post.find(params[:id]) 
+        @post.destroy
+        redirect_to @post
+    end
+
+end
+end
